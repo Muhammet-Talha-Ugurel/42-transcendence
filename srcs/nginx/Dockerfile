@@ -6,7 +6,7 @@ RUN mkdir -p /etc/nginx/ssl && \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/inception.key \
     -out /etc/nginx/ssl/inception.crt \
-    -subj "/C=TR/ST=Istanbul/L=Istanbul/O=Pomet/OU=Development/CN=localhost"
+    -subj "/C=TR/ST=Istanbul/L=Istanbul/O=mtu/OU=Development/CN=localhost"
 
 COPY ./nginx.conf.template /etc/nginx/nginx.conf.template
 

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     "corsheaders",
+    'channels',
+    'websocket',
 ]
 
 REST_FRAMEWORK = {
@@ -81,10 +83,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-CORS_ALLOW_ORIGINS = [
-   #"https://tr.kirit00.com"
-   os.getenv('FRONTEND_DOMAIN', 'http://localhost:80')
-]
+ASGI_APPLICATION = 'backend.asgi.application'
+
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
@@ -96,6 +97,14 @@ CORS_ALLOW_METHODS = [
     'PATCH',
     'DELETE',
     'OPTIONS',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+        f"https://{os.getenv('FRONTEND_DOMAIN')}",
+        f"https://{os.getenv('BACKEND_DOMAIN')}",
+        f"https://{os.getenv('GRAFANA_DOMAIN')}",
+        "http://localhost:80",
+        "http://localhost:8000",
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -122,7 +131,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis:/redis:6379/1",
+        "LOCATION": "redis://redis:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "PASSWORD" : os.getenv('REDIS_PASSWORD'),

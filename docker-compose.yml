@@ -95,6 +95,9 @@ volumes:
     driver: local
   grafana-data:
     driver: local
+  pgadmin-data:
+    driver: local
+
 
 networks:
   trans_network:
